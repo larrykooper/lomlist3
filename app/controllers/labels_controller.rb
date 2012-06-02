@@ -1,10 +1,11 @@
 class LabelsController < ApplicationController
-  
- def destroy
-   idwanted = params[:id]
-   Label.find(idwanted).destroy
-   redirect_to :action => 'tag_report'
- end 
+  before_filter :authenticate_user!
+ 
+  def destroy
+    idwanted = params[:id]
+    Label.find(idwanted).destroy
+    redirect_to :action => 'tag_report'
+  end 
 		
 	def list
 		@labels = Label.find(:all, :order => "name")		

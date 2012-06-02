@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Lomlist3</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>f LO ETC.</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <p style="color: green"><%= flash[:notice] %></p>
+  
+  <ul class="hmenu">    
+    <%= render 'devise/menu/login_items' %>
+  </ul>
+ 
+  <p class="alert"><%= alert %></p>
+  <%= render :partial => "shared/menu"  %>
 
 <%= yield %>
 
