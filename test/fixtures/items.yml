@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+lo_208:
+  id:        1
+  create_date: 1995-06-26
+  number:       208
+  act_type:     LA
+  item_desc:     Learn shiatsu massage
+  
+lo_1685:
+  id:        2
+  create_date: 1997-03-27
+  number:       1685
+  act_type:     LA
+  item_desc:    Put my photos in albums

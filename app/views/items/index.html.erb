@@ -1,0 +1,39 @@
+<h1>Listing items</h1>
+
+<table>
+  <tr>
+    <th>Create date</th>
+    <th>Number</th>
+    <th>Act type</th>
+    <th>Item desc</th>
+    <th>Value when done</th>
+    <th>Where to do</th>
+    <th>Short task name</th>
+    <th>Swiss cheese</th>
+    <th>Out indicator</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @items.each do |item| %>
+  <tr>
+    <td><%= item.create_date %></td>
+    <td><%= item.number %></td>
+    <td><%= item.act_type %></td>
+    <td><%= item.item_desc %></td>
+    <td><%= item.value_when_done %></td>
+    <td><%= item.where_to_do %></td>
+    <td><%= item.short_task_name %></td>
+    <td><%= item.swiss_cheese %></td>
+    <td><%= item.out_indicator %></td>
+    <td><%= link_to 'Show', item %></td>
+    <td><%= link_to 'Edit', edit_item_path(item) %></td>
+    <td><%= link_to 'Destroy', item, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Item', new_item_path %>
