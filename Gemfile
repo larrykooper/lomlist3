@@ -20,7 +20,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'mysql2'
+gem 'pg'
 gem 'devise'
 
 # To use ActiveModel has_secure_password
