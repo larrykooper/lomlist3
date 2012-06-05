@@ -44,26 +44,5 @@
   <%= @item.value_when_done %>
 </p>
 
-<p>
-  <b>Where to do:</b>
-  <%= @item.where_to_do %>
-</p>
-
-<p>
-  <b>Short task name:</b>
-  <%= @item.short_task_name %>
-</p>
-
-<p>
-  <b>Swiss cheese:</b>
-  <%= @item.swiss_cheese %>
-</p>
-
-<p>
-  <b>Out indicator:</b>
-  <%= @item.out_indicator %>
-</p>
-
-
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>
