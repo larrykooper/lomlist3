@@ -1,7 +1,7 @@
 <label>Tags:</label>   
   <% thelist = @item.tags.collect{|t| t.name}.join(" ") %> 
   <div id="mydiv"> 
-  <%= text_field_tag "tag_list", thelist, :size => 40 %>
+  <%= text_field_tag "tag_list", thelist %>
 </div>  
 <b>your tags:</b><br>
 
