@@ -94,6 +94,11 @@ class ItemsController < ApplicationController
       render :action => 'list'
   end 
   
+  def search_by_act_type
+    @items = Item.where(:act_type => params[:typename]).order("number")
+    render :template => 'items/list'
+  end
+  
   # GET /items/1
   # GET /items/1.json
   def show

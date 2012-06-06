@@ -4,6 +4,7 @@ Lomlist3::Application.routes.draw do
   resources :tags
   
   match 'list/:tagname' => 'items#list'   
+  match 'acttype/:typename' => 'items#search_by_act_type'
   match 'items/edit_by_number' => 'items#edit'  
   match 'items/delete_by_number' => 'items#destroy'
   match 'items/search' => 'items#search'

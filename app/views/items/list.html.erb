@@ -36,7 +36,7 @@ Search:
 	<tr>  
 		<td width="84" valign="top"><%= item.create_date.strftime("%m/%d/%y") %></td>
 		<td width="70" valign="top"><%= link_to item.number, :action => "edit", :id => item.id %></td>
-		<td width="70" valign="top"><%= item.act_type %></td>    
+		<td width="70" valign="top"><%= link_to item.act_type, "acttype/#{item.act_type}" %></td>
 		<td width="750" valign="top"><%= raw item.item_desc %><br> 
 			<span class="tagcl">
 			<% item.tags.each do |t| %>   
