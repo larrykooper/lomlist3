@@ -82,6 +82,10 @@ class ItemsController < ApplicationController
     @tagfld.empty!
   end
   
+  def printview
+    @items = Item.order("number") 
+  end
+  
   def search 
     mysearch = "%" + params[:q] + "%"
     @items = Item.find(:all, 

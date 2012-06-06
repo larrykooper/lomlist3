@@ -12,6 +12,7 @@ Lomlist3::Application.routes.draw do
   resources :items do 
     collection do 
       get 'new_next'
+      get 'printview'
     end 
   end 
 
