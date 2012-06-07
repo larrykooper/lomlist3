@@ -1,0 +1,23 @@
+<h1>Listing act_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @act_types.each do |act_type| %>
+  <tr>
+    <td><%= act_type.name %></td>
+    <td><%= link_to 'Show', act_type %></td>
+    <td><%= link_to 'Edit', edit_act_type_path(act_type) %></td>
+    <td><%= link_to 'Destroy', act_type, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Act type', new_act_type_path %>
