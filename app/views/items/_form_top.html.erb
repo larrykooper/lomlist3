@@ -24,15 +24,16 @@
   </tr>
   <tr>
     <td valign="top"><label>Type:</label></td>
-    <td><%= options = Item::ACTIVITY_TYPES 
-    select("item", "act_type", options ) %>
-&nbsp;
-<label>When done, Value (<u>to me</u>):</label>
-<%=
-options = Item::VALUES_WHENDONE
-select("item", "value_when_done", options )
-%>  
-  <br></td>
+    <td>
+      <%= select("item", "act_type", ActType.all.collect {|a| [a.name, a.name]}, :selected => selection) %>
+      &nbsp;
+      <label>When done, Value (<u>to me</u>):</label>
+      <%=
+        options = Item::VALUES_WHENDONE
+        select("item", "value_when_done", options )
+      %>  
+      <br>
+    </td>
     </tr><tr><td></td><td>  
    <br><%= submit_tag 'Save' %></td></tr>
 </table>

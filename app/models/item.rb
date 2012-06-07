@@ -3,16 +3,6 @@ class Item < ActiveRecord::Base
   has_many :taggings, :dependent => :destroy   
   has_many :tags, :through => :taggings
   
-  ACTIVITY_TYPES = [
-	[ "MAINT", "MAINT" ],
-	[ "FO", "FO" ],
-	[ "NFS", "NFS" ],
-	[ "LA", "LA" ],
-	[ "BUDG", "BUDG" ],
-	[ "LBETH", "LBETH" ],
-	[ "JOBS", "JOBS" ]	
-	].freeze
-	
 	VALUES_WHENDONE = [
 	["A", "A"],
 	["B", "B"],

@@ -2,6 +2,7 @@ Lomlist3::Application.routes.draw do
   devise_for :users, :skip => :registrations 
 
   resources :tags
+  resources :act_types
   
   match 'list/:tagname' => 'items#list', :tagname =>  /[^\/]+/
   match 'acttype/:typename' => 'items#search_by_act_type'
