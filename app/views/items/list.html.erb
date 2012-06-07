@@ -17,12 +17,16 @@ Search:
   <input type="submit" value="Delete" />
 <% end %>
 
-<div id="jq-dialog" title="Delete Confirmation">
+<div id="deleteItem-dialog" title="Delete Confirmation">
 	<p><strong>Item to be deleted:</strong>
     <span id="dialog-number"><strong></strong></span>
   </p>   
   <div id="dialog-text"></div>     
   <p><strong>Are you sure?</strong></p>
+</div>
+
+<div id="error-dialog" title="Error">
+  <div id="error-text"></div>
 </div>
 
 <%= form_tag('/items/edit_by_number/', :method => "get") do %>
