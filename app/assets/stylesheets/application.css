@@ -14,3 +14,7 @@
 #top_menu > a {
 	margin-right: 28px;
 }
+
+form#deleteItem {
+  margin: 9px 0;
+}
