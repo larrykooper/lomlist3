@@ -99,6 +99,7 @@ class ItemsController < ApplicationController
   
   def search_by_act_type
     @items = Item.where(:act_type => params[:typename]).order("number")
+    @page_header = "Listing items with Act type: " + params[:typename]
     render :template => 'items/list'
   end
   
