@@ -55,13 +55,14 @@ class ItemsController < ApplicationController
     session[:tagfld] ||= Tagfld.new  
   end
   
-  def list	
-  	@items =
-  	  if tag_name = params[:tagname]
-        Item.find_tagged_with(tag_name).sort			
-  	  else
-  		  Item.order("number")
-  	  end	
+  def list
+    if tag_name = params[:tagname]
+      @items = Item.find_tagged_with(tag_name).sort
+      @page_header = "Listing items with tag: " + tag_name
+    else
+      @items = Item.order("number")
+      @page_header = "Listing all items"
+    end
   end
   
   def mungetags 
