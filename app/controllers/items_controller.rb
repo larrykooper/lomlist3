@@ -32,7 +32,9 @@ class ItemsController < ApplicationController
       idwanted = params[:id]
     end    
     @item = Item.find(idwanted)
+    number_deleted = @item.number
     @item.destroy   
+    flash[:notice] = 'Item ' + number_deleted.to_s + ' was successfully deleted.'
     redirect_to items_url     
   end  
   
@@ -112,12 +114,13 @@ class ItemsController < ApplicationController
   # PUT /items/1
   # PUT /items/1.json
   def update
-   	@item = Item.find(params[:id])
-	  @item.update_attributes(params[:item])
+    @item = Item.find(params[:id])
+    number_updated = @item.number
+    @item.update_attributes(params[:item])
     @item.create_date = Time.local(params[:create_date][:year],params[:create_date][:month],params[:create_date][:day],12,15,1)    
-	  @item.tag_with_manually(params[:tag_list])
-	  @item.save
-    flash[:notice] = 'Item was successfully updated.'
+    @item.tag_with_manually(params[:tag_list])
+    @item.save
+    flash[:notice] = 'Item ' + number_updated.to_s + ' was successfully updated.'
     redirect_to :action => 'show', :id => @item		   
   end
 
