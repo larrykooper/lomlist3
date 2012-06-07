@@ -1,6 +1,14 @@
 // Place all the styles related to the Items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#jq-dialog {
+  display: none;
+}
+
+.ui-widget {
+  font-size: 13px;
+}
+
 #tag_list {
 	width: 708px;
 }

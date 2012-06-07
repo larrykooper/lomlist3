@@ -5,6 +5,7 @@
   <title>f LO ETC.</title>
   <%= stylesheet_link_tag "application", :media => "screen" %>
   <%= stylesheet_link_tag "application-print", :media => "print" %>
+  <%= yield :stylesheet %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>

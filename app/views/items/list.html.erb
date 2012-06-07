@@ -1,3 +1,6 @@
+<% content_for :stylesheet do %>
+  <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css" />
+<% end %>
 <br/><br/>
 <%= form_tag('/items/search', :method => "get") do %>
 Search: 
@@ -8,11 +11,19 @@ Search:
 <%= link_to 'New Next item', :action => 'new_next' %><br><br>
 <%= link_to 'New item with any number', :action => 'new' %>
 
-<%= form_tag('/items/delete_by_number', :method => "delete") do %>
+<%= form_tag('/items/delete_by_number', :id => 'deleteItem', :name => 'deleteItem', :method => "delete") do %>
   Enter a number to delete:
   <%= text_field_tag(:nbrtodelete, params[:nbrtodelete], :size => 5)%>
-  <input onclick="return confirm('Are you sure?');" type="submit" value="Delete" />
+  <input type="submit" value="Delete" />
 <% end %>
+
+<div id="jq-dialog" title="Delete Confirmation">
+	<p><strong>Item to be deleted:</strong>
+    <span id="dialog-number"><strong></strong></span>
+  </p>   
+  <div id="dialog-text"></div>     
+  <p><strong>Are you sure?</strong></p>
+</div>
 
 <%= form_tag('/items/edit_by_number/', :method => "get") do %>
   Enter a number to edit:
@@ -37,7 +48,8 @@ Search:
 		<td width="84" valign="top"><%= item.create_date.strftime("%m/%d/%y") %></td>
 		<td width="70" valign="top"><%= link_to item.number, :action => "edit", :id => item.id %></td>
 		<td width="70" valign="top"><%= link_to item.act_type, "acttype/#{item.act_type}" %></td>
-		<td width="750" valign="top"><%= raw item.item_desc %><br> 
+		<td width="750" valign="top">
+		  <span id="text-<%= item.number %>"><%= raw item.item_desc %></span><br>
 			<span class="tagcl">
 			<% item.tags.each do |t| %>   
 				<%= link_to t.name, :action => "list", :tagname => t.name %>
