@@ -3,7 +3,7 @@ class ActTypesController < ApplicationController
   # GET /act_types
   # GET /act_types.json
   def index
-    @act_types = ActType.all
+    @act_types = ActType.order("name")
 
     respond_to do |format|
       format.html # index.html.erb
