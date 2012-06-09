@@ -1,0 +1,14 @@
+<h1>Tags</h1>
+<h2>Used Tags</h2>
+<% @used_tags.each do |tag|  %>
+	<%= link_to tag.name, "/list/#{tag.name}" %>
+  <%= tag.items_count %>
+  <br/>
+<% end %>
+
+<h2>Unused Tags</h2>
+<% @unused_tags.each do |tag| %>
+  <%= tag.name %>
+  <%= link_to 'Delete', tag, :method => :delete,  :confirm => 'Are you sure?' %></td> 
+ <br/>
+<% end %>

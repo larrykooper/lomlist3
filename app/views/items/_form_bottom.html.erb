@@ -5,7 +5,7 @@
 </div>  
 <b>your tags:</b><br>
 
-<% @labels = Label.used_tags %>
+<% @labels = Tag.used_tags %>
   <% for label in @labels %>
     <span class="tag">
       <%= label.name %>

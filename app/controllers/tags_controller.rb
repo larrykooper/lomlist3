@@ -77,8 +77,14 @@ class TagsController < ApplicationController
     @tag.destroy
 
     respond_to do |format|
-      format.html { redirect_to tags_url }
+      format.html { redirect_to '/tags/tag_report' }
       format.json { head :no_content }
     end
   end
+
+  def tag_report
+    @used_tags = Tag.used_tags
+    @unused_tags = Tag.unused_tags
+  end
+
 end

@@ -1,7 +1,12 @@
 Lomlist3::Application.routes.draw do
   devise_for :users, :skip => :registrations 
 
-  resources :tags
+  resources :tags do
+    collection do
+      get 'tag_report'
+    end
+  end
+
   resources :act_types
   
   match 'list/:tagname' => 'items#list', :tagname =>  /[^\/]+/
@@ -9,7 +14,6 @@ Lomlist3::Application.routes.draw do
   match 'items/edit_by_number' => 'items#edit'  
   match 'items/delete_by_number' => 'items#destroy'
   match 'items/search' => 'items#search'
-  match 'labels/tag_report' => 'labels#tag_report'
   
   resources :items do 
     collection do 

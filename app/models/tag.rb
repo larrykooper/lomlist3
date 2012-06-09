@@ -3,7 +3,7 @@
 class Tag < ActiveRecord::Base
   attr_accessible :name
   has_many :taggings
-  has_many :users, :through => :taggings
+  has_many :items, :through => :taggings
   
   # input is a delimited list of tags 
   # output is an array of tags 
@@ -22,8 +22,22 @@ class Tag < ActiveRecord::Base
     return tag_names
   end  
   
-  def add_item_manually(item)    
-     Tagging.create(:tag => self, :item => item)    
-   end  
+  def self.used_tags
+    Tag.joins(:taggings).select("distinct tags.id, tags.name, LOWER(tags.name)").order("LOWER(tags.name)")
+  end
   
+  def self.unused_tags
+    find_by_sql("select id, name from tags " +
+    "where id not in (select tag_id from taggings) " +
+    "order by LOWER(name)")
+  end
+
+  def add_item_manually(item)
+    Tagging.create(:tag => self, :item => item)
+  end
+  
+  def items_count
+    self.taggings.count
+  end
+
 end
