@@ -1,14 +1,9 @@
 <br/><%= link_to 'New Next item', :action => 'new_next' %><br><br>
 <%= link_to 'New item with any number', :action => 'new' %><br/><br/>
-<%= form_tag(:action => :destroy) do %>
-  Enter a number to delete:
-  <%= text_field_tag(:ndelete, params[:ndelete], :size => 5)%>
-  <input onclick="return confirm('Are you sure?');" type="submit" value="Delete" />
-<% end %>
 
-<%= form_tag(:action => :edit) do %>
+<%= form_tag('/items/edit_by_number/', :method => "get") do %>
   Enter a number to edit:
-  <%= text_field_tag(:nedit, params[:nedit], :size => 5)%>
+  <%= text_field_tag(:nbrtoedit, params[:nbrtoedit], :size => 5)%>
   <%= submit_tag 'Edit' %>
 <% end %>
 

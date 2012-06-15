@@ -40,15 +40,25 @@ class ItemsController < ApplicationController
   
   # GET /items/1/edit
   def edit       
-    if params[:nbrtoedit]     
-      idwanted = Item.where(:number => params[:nbrtoedit]).first.id  
+    if params[:nbrtoedit]    
+      item_to_edit = Item.where(:number => params[:nbrtoedit]).first  
+      if item_to_edit  
+        idwanted = item_to_edit.id  
+      else 
+        idwanted = nil 
+      end   
     else    
       idwanted = params[:id]
-    end  
-    @item = Item.find(idwanted) 
-    @lastitem = @item
-    @tagfld = find_tagfld
-    @tagfld.empty!
+    end
+    if idwanted 
+      @item = Item.find(idwanted)     
+      @lastitem = @item
+      @tagfld = find_tagfld
+      @tagfld.empty!
+    else 
+      flash[:notice] = 'That item does not exist.'
+      redirect_to :action => 'list'
+    end
   end  
   
   def find_tagfld
