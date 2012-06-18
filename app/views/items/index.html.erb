@@ -1,39 +1,72 @@
-<h1>Listing items</h1>
+<% content_for :stylesheet do %>
+  <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css" />
+<% end %>
+<br/><br/>
+<%= form_tag('/items/search', :method => "get") do %>
+Search: 
+  <%= text_field_tag(:q, params[:q], :size => 30)%>
+  <%= submit_tag 'Go' %>
+<% end %>
 
-<table>
-  <tr>
+<%= link_to 'New Next item', :action => 'new_next' %><br><br>
+<%= link_to 'New item with any number', :action => 'new' %>
+
+<%= form_tag('/items/delete_by_number', :id => 'deleteItem', :name => 'deleteItem', :method => "delete") do %>
+  Enter a number to delete:
+  <%= text_field_tag(:nbrtodelete, params[:nbrtodelete], :size => 5)%>
+  <input type="submit" value="Delete" />
+<% end %>
+
+<div id="deleteItem-dialog" title="Delete Confirmation">
+	<p><strong>Item to be deleted:</strong>
+    <span id="dialog-number"><strong></strong></span>
+  </p>   
+  <div id="dialog-text"></div>     
+  <p><strong>Are you sure?</strong></p>
+</div>
+
+<div id="error-dialog" title="Error">
+  <div id="error-text"></div>
+</div>
+
+<%= form_tag('/items/edit_by_number/', :method => "get") do %>
+  Enter a number to edit:
+  <%= text_field_tag(:nbrtoedit, params[:nbrtoedit], :size => 5)%>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<h1><%= @page_header %></h1>
+
+<table border="1">
+  <tr>  
     <th>Create date</th>
     <th>Number</th>
     <th>Act type</th>
     <th>Item desc</th>
-    <th>Value when done</th>
-    <th>Where to do</th>
-    <th>Short task name</th>
-    <th>Swiss cheese</th>
-    <th>Out indicator</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>When<br/>done,<br />Value<br />(<u>to me</u>)</th>
+    <th></th>  
   </tr>
-
+  
 <% @items.each do |item| %>
-  <tr>
-    <td><%= item.create_date %></td>
-    <td><%= item.number %></td>
-    <td><%= item.act_type %></td>
-    <td><%= item.item_desc %></td>
-    <td><%= item.value_when_done %></td>
-    <td><%= item.where_to_do %></td>
-    <td><%= item.short_task_name %></td>
-    <td><%= item.swiss_cheese %></td>
-    <td><%= item.out_indicator %></td>
-    <td><%= link_to 'Show', item %></td>
-    <td><%= link_to 'Edit', edit_item_path(item) %></td>
-    <td><%= link_to 'Destroy', item, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+	<tr>  
+		<td width="84" valign="top"><%= item.create_date.strftime("%m/%d/%y") %></td>
+		<td width="70" valign="top"><%= link_to item.number, :action => "edit", :id => item.id %></td>
+		<td width="70" valign="top"><%= link_to item.act_type, "acttype/#{item.act_type}" %></td>
+		<td width="750" valign="top">
+		  <span id="text-<%= item.number %>"><%= raw item.item_desc %></span><br>
+			<span class="tagcl">
+			<% item.tags.each do |t| %>   
+				<%= link_to t.name, "list/#{t.name}" %>
+			<% end %>
+			</span>
+		</td>
+		<td valign="top"><%= item.value_when_done %></td>
+		<td valign="top"><%= link_to 'Edit', :action => 'edit', :id => item %><br /><br />
+    <%= link_to 'Delete', item, :method => :delete, :confirm => 'Are you sure you want to delete ' + item.number.to_s + '?' %></td>
+	</tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Item', new_item_path %>
+<%= link_to 'New Next item', :controller => 'items', :action => 'new_next' %><br><br>
+<%= link_to 'New item with any number', :action => 'new' %>

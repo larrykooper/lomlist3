@@ -9,7 +9,7 @@ Lomlist3::Application.routes.draw do
 
   resources :act_types
   
-  match 'list/:tagname' => 'items#list', :tagname =>  /[^\/]+/
+  match 'list/:tagname' => 'items#index', :tagname =>  /[^\/]+/
   match 'acttype/:typename' => 'items#search_by_act_type'
   match 'items/edit_by_number' => 'items#edit'  
   match 'items/delete_by_number' => 'items#destroy'
@@ -26,7 +26,7 @@ Lomlist3::Application.routes.draw do
 
   get "admin/index"
   
-  root :to => 'items#list'   
+  root :to => 'items#index'   
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

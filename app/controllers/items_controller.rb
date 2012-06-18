@@ -1,14 +1,6 @@
 class ItemsController < ApplicationController
    before_filter :authenticate_user!
   
-  # GET /items
-  # GET /items.json
-  def index
-    list 
-    render :action => 'list' 
-    
-  end
-  
   # POST /items
   # POST /items.json 
   def create
@@ -57,7 +49,7 @@ class ItemsController < ApplicationController
       @tagfld.empty!
     else 
       flash[:notice] = 'That item does not exist.'
-      redirect_to :action => 'list'
+      redirect_to :action => 'index'
     end
   end  
   
@@ -65,14 +57,20 @@ class ItemsController < ApplicationController
     session[:tagfld] ||= Tagfld.new  
   end
   
-  def list
+  # GET /items
+  # GET /items.json
+  def index
     if tag_name = params[:tagname]
       @items = Item.find_tagged_with(tag_name).sort
       @page_header = "Listing items with tag: " + tag_name
     else
       @items = Item.order("number")
       @page_header = "Listing all items"
-    end
+    end    
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @items }
+    end     
   end
   
   def mungetags 
@@ -104,13 +102,13 @@ class ItemsController < ApplicationController
     @items = Item.find(:all, 
       :conditions => ["item_desc LIKE ?", mysearch], 
       :order => "number")   
-      render :action => 'list'
+      render :action => 'index'
   end 
   
   def search_by_act_type
     @items = Item.where(:act_type => params[:typename]).order("number")
     @page_header = "Listing items with Act type: " + params[:typename]
-    render :template => 'items/list'
+    render :template => 'items/index'
   end
   
   # GET /items/1
