@@ -1,7 +1,7 @@
 <h1>Tags</h1>
 <h2>Used Tags</h2>
 <% @used_tags.each do |tag|  %>
-	<%= link_to tag.name, "/list/#{tag.name}" %>
+	<%= link_to tag.name, "/tags/#{tag.name}/items" %>
   <%= tag.items_count %>
   <br/>
 <% end %>
