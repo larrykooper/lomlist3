@@ -3,6 +3,7 @@ class Item < ActiveRecord::Base
   has_many :taggings, :dependent => :destroy   
   has_many :tags, :through => :taggings
   validates :number, :uniqueness => true
+  validates :number, :numericality => { :only_integer => true, :greater_than => 0 }
   
 	VALUES_WHENDONE = [
 	["A", "A"],
