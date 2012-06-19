@@ -15,7 +15,7 @@ Search:
 </div>
 <%= form_tag('/items/delete_by_number', :id => 'deleteItem', :name => 'deleteItem', :method => "delete") do %>
   Enter a number to delete:
-  <%= text_field_tag(:number, params[:number], :size => 5)%>
+  <%= text_field_tag(:number_to_delete, nil, :size => 5)%>
   <input type="submit" value="Delete" />
 <% end %>
 
@@ -33,7 +33,7 @@ Search:
 
 <%= form_tag('/items/edit_by_number/', :method => "get") do %>
   Enter a number to edit:
-  <%= text_field_tag(:number, params[:number], :size => 5)%>
+  <%= text_field_tag(:number_to_edit, nil, :size => 5)%>
   <%= submit_tag 'Edit' %>
 <% end %>
 

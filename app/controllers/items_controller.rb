@@ -18,8 +18,8 @@ class ItemsController < ApplicationController
  
   # DELETE /items/1
   def destroy    
-    if params[:number]
-      idwanted = Item.where(:number => params[:number]).first.id
+    if params[:number_to_delete]
+      idwanted = Item.where(:number => params[:number_to_delete]).first.id
     else    
       idwanted = params[:id]
     end    
@@ -32,8 +32,8 @@ class ItemsController < ApplicationController
   
   # GET /items/1/edit
   def edit       
-    if params[:number]
-      item_to_edit = Item.find_by_number(params[:number])
+    if params[:number_to_edit]
+      item_to_edit = Item.find_by_number(params[:number_to_edit])
       if item_to_edit  
         idwanted = item_to_edit.id  
       else 

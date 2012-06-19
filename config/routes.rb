@@ -5,6 +5,8 @@ Lomlist3::Application.routes.draw do
   match '/items/new' => 'items#new', :via => :get
   match '/items/printview' => 'items#printview', :via => :get
   match '/items/search' => 'items#search'
+  match '/items/delete_by_number' => 'items#destroy'
+  match '/items/edit_by_number' => 'items#edit'
   match '/items' => 'items#index', :via => :get
   match '/items' => 'items#create', :via => :post
   match '/items/:number' => 'items#show', :via => :get

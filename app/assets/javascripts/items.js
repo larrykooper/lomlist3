@@ -34,7 +34,7 @@ $(document).ready(function() {
 
 	$('form#deleteItem').submit(function(e){
     e.preventDefault();     
-    var nbrtodelete = $("input#nbrtodelete").val();
+    var nbrtodelete = $("input#number_to_delete").val();
     var itemSpan = $("#text-"+nbrtodelete);
     if (itemSpan.length == 0) {
       $("div#error-text").html(nbrtodelete+": Number does not exist."); 
