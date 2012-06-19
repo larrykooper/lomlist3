@@ -13,7 +13,7 @@ class ItemTest < ActiveSupport::TestCase
   def test_create
     assert_kind_of Item,  @item
     assert_equal 1, @item.id
-    assert_equal "1995-06-26", @item.create_date_before_type_cast
+    assert_equal "1995-06-26 00:00:00", @item.create_date_before_type_cast
     assert_equal 208, @item.number
     assert_equal "LA" , @item.act_type
     assert_equal "Learn shiatsu massage", @item.item_desc        
