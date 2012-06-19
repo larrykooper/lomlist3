@@ -1,10 +1,10 @@
 class Item < ActiveRecord::Base
   attr_accessible :act_type, :create_date, :item_desc, :number, :out_indicator, :short_task_name, :swiss_cheese, :value_when_done, :where_to_do
   has_many :taggings, :dependent => :destroy   
-  has_many :tags, :through => :taggings
+  has_many :tags, :through => :taggings, :uniq => true
   validates :number, :uniqueness => true
   validates :number, :numericality => { :only_integer => true, :greater_than => 0 }
-  validates :item_desc, :presence => true
+  validates :item_desc, :presence => true  
   
 	VALUES_WHENDONE = [
 	["A", "A"],
