@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
     @item.tag_with_manually(params[:tag_list])
     if @item.save
       flash[:notice] = 'Item  ' + @item.number.to_s + ' was successfully created.'
-      redirect_to :action => 'show', :id => @item.id
+      redirect_to :action => 'show', :number => @item.number
     else
       render :action => 'new'
     end

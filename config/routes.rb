@@ -1,8 +1,8 @@
 Lomlist3::Application.routes.draw do
   devise_for :users, :skip => :registrations 
 
-
   match '/items/new_next' => 'items#new_next', :via => :post
+  match '/items/new' => 'items#new', :via => :get
   match '/items/printview' => 'items#printview', :via => :get
   match '/items/search' => 'items#search'
   match '/items' => 'items#index', :via => :get
@@ -11,7 +11,6 @@ Lomlist3::Application.routes.draw do
   match '/items/:number' => 'items#update', :via => :put
   match '/items/:number' => 'items#destroy', :via => :delete
   match '/items/:number/edit' => 'items#edit', :via => :get
-  match '/items/new' => 'items#new', :via => :get
 
   match 'tags/:tagname/items' => 'items#index', :tagname =>  /[^\/]+/
 

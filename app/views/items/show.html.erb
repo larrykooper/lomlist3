@@ -1,4 +1,10 @@
-<br/><%= link_to 'New Next item', :action => 'new_next' %><br><br>
+<br/>
+
+<%= form_tag('/items/new_next', :method => "post") do %>
+  <%= submit_tag 'New Next Item' %>
+<% end %>
+
+<br/>
 <%= link_to 'New item with any number', :action => 'new' %><br/><br/>
 
 <%= form_tag('/items/edit_by_number/', :method => "get") do %>

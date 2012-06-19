@@ -1,16 +1,18 @@
 <% content_for :stylesheet do %>
   <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css" />
 <% end %>
-<br/><br/>
-<%= form_tag('/items/search', :method => "get") do %>
+<%= form_tag('/items/search', :id => 'searchForm', :method => "get") do %>
 Search: 
   <%= text_field_tag(:q, params[:q], :size => 30)%>
   <%= submit_tag 'Go' %>
 <% end %>
 
-<%= link_to 'New Next item', :action => 'new_next' %><br><br>
-<%= link_to 'New item with any number', :action => 'new' %>
-
+<%= form_tag('/items/new_next', :class => 'newNextItemForm', :method => "post") do %>
+  <%= submit_tag 'New Next Item' %>
+<% end %>
+<div id="newItem">
+  <%= link_to 'New item with any number', :action => 'new' %>
+</div>
 <%= form_tag('/items/delete_by_number', :id => 'deleteItem', :name => 'deleteItem', :method => "delete") do %>
   Enter a number to delete:
   <%= text_field_tag(:number, params[:number], :size => 5)%>
@@ -67,6 +69,8 @@ Search:
 <% end %>
 </table>
 
-<br />
-<%= link_to 'New Next item', :controller => 'items', :action => 'new_next' %><br><br>
+<%= form_tag('/items/new_next', :class => 'newNextItemForm', :method => "post") do %>
+  <%= submit_tag 'New Next Item' %>
+<% end %>
+
 <%= link_to 'New item with any number', :action => 'new' %>
