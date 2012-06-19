@@ -1,6 +1,6 @@
 <h1>Editing item</h1>
 
-<%= form_for(@item) do |f|%>
+<%= form_for @item, :url => "/items/#{@item.number}" do |f|%>
 
   <%= render(:partial => "form_top", :locals => {:selection => @item.act_type})%>
   <label>Item Contents:</label><br>

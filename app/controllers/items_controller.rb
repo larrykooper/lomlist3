@@ -18,8 +18,8 @@ class ItemsController < ApplicationController
  
   # DELETE /items/1
   def destroy    
-    if params[:nbrtodelete]     
-      idwanted = Item.where(:number => params[:nbrtodelete]).first.id  
+    if params[:number]
+      idwanted = Item.where(:number => params[:number]).first.id
     else    
       idwanted = params[:id]
     end    
@@ -32,18 +32,16 @@ class ItemsController < ApplicationController
   
   # GET /items/1/edit
   def edit       
-    if params[:nbrtoedit]    
-      item_to_edit = Item.where(:number => params[:nbrtoedit]).first  
+    if params[:number]
+      item_to_edit = Item.find_by_number(params[:number])
       if item_to_edit  
         idwanted = item_to_edit.id  
       else 
         idwanted = nil 
-      end   
-    else    
-      idwanted = params[:id]
+      end
     end
     if idwanted 
-      @item = Item.find(idwanted)     
+      @item = item_to_edit
       @lastitem = @item
       @tagfld = find_tagfld
       @tagfld.empty!
@@ -114,7 +112,7 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
-    @item = Item.find(params[:id])
+    @item = Item.find_by_number(params[:number])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @item }
@@ -124,14 +122,14 @@ class ItemsController < ApplicationController
   # PUT /items/1
   # PUT /items/1.json
   def update
-    @item = Item.find(params[:id])
+    @item = Item.find_by_number(params[:number])
     number_updated = @item.number
     @item.update_attributes(params[:item])
     @item.create_date = Time.local(params[:create_date][:year],params[:create_date][:month],params[:create_date][:day],12,15,1)    
     @item.tag_with_manually(params[:tag_list])
     @item.save
     flash[:notice] = 'Item ' + number_updated.to_s + ' was successfully updated.'
-    redirect_to :action => 'show', :id => @item		   
+    redirect_to :action => 'show', :number => @item.number
   end
 
 end

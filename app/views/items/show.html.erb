@@ -3,7 +3,7 @@
 
 <%= form_tag('/items/edit_by_number/', :method => "get") do %>
   Enter a number to edit:
-  <%= text_field_tag(:nbrtoedit, params[:nbrtoedit], :size => 5)%>
+  <%= text_field_tag(:number, params[:number], :size => 5)%>
   <%= submit_tag 'Edit' %>
 <% end %>
 
@@ -39,5 +39,5 @@
   <%= @item.value_when_done %>
 </p>
 
-<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Edit', "/items/#{@item.number}/edit" %> |
 <%= link_to 'Back', items_path %>
