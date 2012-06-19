@@ -17,7 +17,8 @@ class ItemsController < ApplicationController
     end
   end
  
-  # DELETE /items/1
+  # DELETE /items/{number}
+  # DELETE /items/{number}.json
   def destroy    
     if params[:number_to_delete]
       @item = Item.find_by_number(params[:number_to_delete])
@@ -34,7 +35,7 @@ class ItemsController < ApplicationController
     redirect_to items_url     
   end  
   
-  # GET /items/1/edit
+  # GET /items/{number}/edit
   def edit       
     if params[:number_to_edit]
       @item = Item.find_by_number(params[:number_to_edit])
@@ -54,8 +55,14 @@ class ItemsController < ApplicationController
     session[:tagfld] ||= Tagfld.new  
   end
   
+  # List all items:
+  # GET /
   # GET /items
   # GET /items.json
+
+  # List items with tag "foo":
+  # GET /tags/foo/items 
+  # GET /tags/foo/items.json
   def index
     if tag_name = params[:tagname]
       @items = Item.find_tagged_with(tag_name).sort
@@ -78,6 +85,9 @@ class ItemsController < ApplicationController
     @tags_to_display = ""
   end
   
+  # Get LO number of "new next item"
+  # POST /items/new-next 
+  # POST /items/next-number.json
   def new_next 
     @lastitem = Item.find(:first, :order => "id DESC")
     @item = Item.new_next
@@ -102,8 +112,8 @@ class ItemsController < ApplicationController
     render :template => 'items/index'
   end
   
-  # GET /items/1
-  # GET /items/1.json
+  # GET /items/{number}
+  # GET /items/{number}.json
   def show
     @item = Item.find_by_number(params[:number])
     respond_to do |format|
@@ -112,8 +122,8 @@ class ItemsController < ApplicationController
     end
   end
 
-  # PUT /items/1
-  # PUT /items/1.json
+  # PUT /items/{number}
+  # PUT /items/{number}.json
   def update
     @item = Item.find_by_number(params[:number])
     number_updated = @item.number
