@@ -71,10 +71,6 @@ class ItemsController < ApplicationController
     end     
   end
   
-  def mungetags 
-    @thetags = Item.tags
-  end    
-  
   # GET /items/new
   # GET /items/new.json
   def new     
