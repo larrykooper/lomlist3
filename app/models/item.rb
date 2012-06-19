@@ -2,6 +2,7 @@ class Item < ActiveRecord::Base
   attr_accessible :act_type, :create_date, :item_desc, :number, :out_indicator, :short_task_name, :swiss_cheese, :value_when_done, :where_to_do
   has_many :taggings, :dependent => :destroy   
   has_many :tags, :through => :taggings
+  validates :number, :uniqueness => true
   
 	VALUES_WHENDONE = [
 	["A", "A"],
@@ -24,6 +25,10 @@ class Item < ActiveRecord::Base
 		theitem.number = Integer(res['maxnum']) + 1
 		theitem
 	end
+	
+	def tag_string
+	  self.tags.collect{|t| t.name}.join(" ") 
+	end 
 	
 	def tag_with_manually(list)
     Tag.transaction do

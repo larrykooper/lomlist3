@@ -7,11 +7,12 @@ class ItemsController < ApplicationController
     @item = Item.new(params[:item])
     @item.create_date =    Time.local(params[:create_date][:year],params[:create_date][:month],params[:create_date][:day],12,15,1)    
     @item.item_desc = params[:larrytext]
-    @item.tag_with_manually(params[:tag_list])
     if @item.save
+      @item.tag_with_manually(params[:tag_list])
       flash[:notice] = 'Item  ' + @item.number.to_s + ' was successfully created.'
       redirect_to :action => 'show', :number => @item.number
     else
+      @tags_to_display = params[:tag_list]
       render :action => 'new'
     end
   end
@@ -19,32 +20,30 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   def destroy    
     if params[:number_to_delete]
-      idwanted = Item.where(:number => params[:number_to_delete]).first.id
-    else    
-      idwanted = params[:id]
+      @item = Item.find_by_number(params[:number_to_delete])
+    elsif params[:number]
+      @item = Item.find_by_number(params[:number])
     end    
-    @item = Item.find(idwanted)
-    number_deleted = @item.number
-    @item.destroy   
-    flash[:notice] = 'Item ' + number_deleted.to_s + ' was successfully deleted.'
+    if @item
+      number_deleted = @item.number
+      @item.destroy
+      flash[:notice] = 'Item ' + number_deleted.to_s + ' was successfully deleted.'
+    else
+      flash[:notice] = 'That item does not exist.'
+    end
     redirect_to items_url     
   end  
   
   # GET /items/1/edit
   def edit       
     if params[:number_to_edit]
-      item_to_edit = Item.find_by_number(params[:number_to_edit])
-      if item_to_edit  
-        idwanted = item_to_edit.id  
-      else 
-        idwanted = nil 
-      end
+      @item = Item.find_by_number(params[:number_to_edit])
+    elsif params[:number]
+      @item = Item.find_by_number(params[:number])
     end
-    if idwanted 
-      @item = item_to_edit
-      @lastitem = @item
-      @tagfld = find_tagfld
-      @tagfld.empty!
+    if @item
+      @lastitem = @item     
+      @tags_to_display = @item.tag_string
     else 
       flash[:notice] = 'That item does not exist.'
       redirect_to :action => 'index'
@@ -75,16 +74,14 @@ class ItemsController < ApplicationController
   # GET /items/new.json
   def new     
     @lastitem = Item.find(:first, :order => "id DESC")
-    @item = Item.new
-    @tagfld = find_tagfld
-    @tagfld.empty!    
+    @item = Item.new   
+    @tags_to_display = ""
   end
   
   def new_next 
     @lastitem = Item.find(:first, :order => "id DESC")
     @item = Item.new_next
-    @tagfld = find_tagfld
-    @tagfld.empty!
+    @tags_to_display = ""   
   end
   
   def printview

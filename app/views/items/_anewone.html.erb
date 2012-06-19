@@ -1,8 +1,20 @@
 <h1>New item</h1>
 <%= form_tag("/items", :method => "post")  do %>
+
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+      <ul>
+      <% @item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= render(:partial => "form_top", :locals => {:selection => "MAINT"})%>
   <p><label for="item_item_desc">Item Contents:</label><br/>
-    <%= text_area_tag "larrytext", nil, :size => "80x20" %>
+    <%= text_area_tag "larrytext", @item.item_desc, :size => "80x20" %>
   </p>
   <%= render(:partial => "form_bottom")%>
   <%= link_to 'Back', '/items' %>

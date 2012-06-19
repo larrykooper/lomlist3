@@ -1,7 +1,6 @@
-<label>Tags:</label>   
-  <% thelist = @item.tags.collect{|t| t.name}.join(" ") %> 
-  <div id="mydiv"> 
-  <%= text_field_tag "tag_list", thelist %>
+<label>Tags:</label>    
+<div id="mydiv"> 
+  <%= text_field_tag "tag_list", @tags_to_display %>
 </div>  
 <b>your tags:</b><br>
 
@@ -13,5 +12,4 @@
     &nbsp;    
   <% end %>
 <br><br>  
-<%= submit_tag 'Save' %>
-  
+<%= submit_tag 'Save' %>  
