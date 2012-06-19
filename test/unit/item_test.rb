@@ -8,7 +8,6 @@ class ItemTest < ActiveSupport::TestCase
   def setup
     @item = Item.find(1)
   end
-
  
   def test_create
     assert_kind_of Item,  @item
@@ -35,8 +34,6 @@ class ItemTest < ActiveSupport::TestCase
   def test_new_next
 	  mything = Item.new_next
 	  assert mything.number = 1686
-  end 
-
-  
+  end   
   
 end

@@ -35,3 +35,10 @@ gem 'devise'
 
 # To use debugger
 # gem 'debugger'
+
+group :test do 
+  gem 'cucumber-rails', '1.2.1'
+  gem 'rspec-rails', '2.7.0'
+  gem 'database_cleaner', '0.7.0'
+  gem 'factory_girl_rails'
+end
