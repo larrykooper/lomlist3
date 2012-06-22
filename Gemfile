@@ -36,6 +36,9 @@ gem 'devise'
 # To use debugger
 # gem 'debugger'
 
+# To use 'thin' web server 
+gem 'thin'
+
 group :test do 
   gem 'cucumber-rails', '1.2.1'
   gem 'rspec-rails', '2.7.0'
