@@ -19,13 +19,13 @@
     </td>
   </tr>
   <tr>
-    <td><label>LO Number:</label></td>
+    <td><label>Item Number:</label></td>
     <td><%= text_field 'item', 'number' %></td> 
   </tr>
   <tr>
     <td valign="top"><label>Type:</label></td>
     <td>
-      <%= select("item", "act_type", ActType.all.collect {|a| [a.name, a.name]}, :selected => selection) %>
+      <%= select("item", "act_type", current_user.act_types.collect {|a| [a.name, a.name]}, :selected => selection) %>
       &nbsp;
       <label>When done, Value (<u>to me</u>):</label>
       <%=

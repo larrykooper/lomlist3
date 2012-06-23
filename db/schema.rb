@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120623172052) do
+ActiveRecord::Schema.define(:version => 20120623193150) do
 
   create_table "act_types", :force => true do |t|
     t.string   "name"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20120623172052) do
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id",     :limit => 8, :default => 0, :null => false
-    t.integer  "item_id"
+    t.integer  "item_id",                                :null => false
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.integer  "user_id",                                :null => false

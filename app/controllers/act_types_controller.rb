@@ -3,7 +3,7 @@ class ActTypesController < ApplicationController
   # GET /act_types
   # GET /act_types.json
   def index
-    @act_types = ActType.order("name")
+    @act_types = current_user.act_types.order("name")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,6 +42,7 @@ class ActTypesController < ApplicationController
   # POST /act_types.json
   def create
     @act_type = ActType.new(params[:act_type])
+    @act_type.user = current_user
 
     respond_to do |format|
       if @act_type.save

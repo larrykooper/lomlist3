@@ -21,13 +21,11 @@ class ItemsController < ApplicationController
   # DELETE /items/{number}
   # DELETE /items/{number}.json
   def destroy    
-    if params[:number_to_delete]
-      @item = Item.find_by_number(params[:number_to_delete])
-    elsif params[:number]
-      @item = Item.find_by_number(params[:number])
-    end    
+    number_wanted = params[:number_to_delete] ? params[:number_to_delete] : params[:number] 
+    @item = current_user.items.find_by_number(number_wanted)       
     if @item
       number_deleted = @item.number
+      @item.taggings.each(&:destroy)
       @item.destroy
       flash[:notice] = 'Item ' + number_deleted.to_s + ' was successfully deleted.'
     else

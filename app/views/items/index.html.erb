@@ -52,8 +52,8 @@ Search:
 <% @items.each do |item| %>
 	<tr>  
 		<td width="84" valign="top"><%= item.create_date.strftime("%m/%d/%y") %></td>
-		<td width="70" valign="top"><%= link_to item.number, "items/#{item.number}/edit" %></td>
-		<td width="70" valign="top"><%= link_to item.act_type, "acttype/#{item.act_type}" %></td>
+		<td width="70" valign="top"><%= link_to item.number, "/items/#{item.number}/edit" %></td>
+		<td width="70" valign="top"><%= link_to item.act_type, "/acttype/#{item.act_type}" %></td>
 		<td width="750" valign="top">
 		  <span id="text-<%= item.number %>"><%= raw item.item_desc %></span><br>
 			<span class="tagcl">
@@ -63,7 +63,7 @@ Search:
 			</span>
 		</td>
 		<td valign="top"><%= item.value_when_done %></td>
-		<td valign="top"><%= link_to 'Edit', "items/#{item.number}/edit" %><br /><br />
+		<td valign="top"><%= link_to 'Edit', "/items/#{item.number}/edit" %><br /><br />
     <%= link_to 'Delete', "/items/#{item.number}", :method => :delete, :confirm => 'Are you sure you want to delete ' + item.number.to_s + '?' %></td>
 	</tr>
 <% end %>

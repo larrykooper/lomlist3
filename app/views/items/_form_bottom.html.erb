@@ -1,8 +1,8 @@
-<label>Tags:</label>    
+<label>Tags:</label>&nbsp;(Separate tags by spaces.)   
 <div id="mydiv"> 
   <%= text_field_tag "tag_list", @tags_to_display %>
 </div>  
-<b>your tags:</b><br>
+<b>your tags:</b>&nbsp;(Click on a tag to add it.)<br>
 
 <% @labels = Tag.used_tags(current_user) %>
   <% for label in @labels %>
