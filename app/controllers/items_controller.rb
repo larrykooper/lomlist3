@@ -99,7 +99,7 @@ class ItemsController < ApplicationController
   def search 
     mysearch = "%" + params[:q] + "%"
     @items = Item.find(:all, 
-      :conditions => ["item_desc LIKE ?", mysearch], 
+      :conditions => ["item_desc LIKE ? AND user_id = ?", mysearch, current_user.id], 
       :order => "number")   
       render :action => 'index'
   end 
@@ -127,7 +127,7 @@ class ItemsController < ApplicationController
     number_updated = @item.number
     @item.update_attributes(params[:item])
     @item.create_date = Time.local(params[:create_date][:year],params[:create_date][:month],params[:create_date][:day],12,15,1)    
-    @item.tag_with_manually(params[:tag_list])
+    @item.tag_with_manually(params[:tag_list], current_user)
     @item.save
     flash[:notice] = 'Item ' + number_updated.to_s + ' was successfully updated.'
     redirect_to :action => 'show', :number => @item.number

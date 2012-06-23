@@ -83,8 +83,8 @@ class TagsController < ApplicationController
   end
 
   def tag_report
-    @used_tags = Tag.used_tags
-    @unused_tags = Tag.unused_tags
+    @used_tags = Tag.used_tags(current_user)
+    @unused_tags = Tag.unused_tags(current_user)
   end
 
 end

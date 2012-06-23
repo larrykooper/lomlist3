@@ -27,10 +27,8 @@ class Tag < ActiveRecord::Base
     Tag.joins(:taggings).select("distinct tags.id, tags.name, LOWER(tags.name)").where("tags.user_id = ?", user.id).order("LOWER(tags.name)") 
   end
   
-  def self.unused_tags
-    find_by_sql("select id, name from tags " +
-    "where id not in (select tag_id from taggings) " +
-    "order by LOWER(name)")
+  def self.unused_tags(user)
+    find_by_sql(["SELECT id, name FROM tags WHERE user_id = ? AND id NOT IN (SELECT tag_id FROM taggings) ORDER BY LOWER(name)", user.id])
   end
 
   def add_item_manually(item, user)

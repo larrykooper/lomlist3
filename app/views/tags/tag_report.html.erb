@@ -1,4 +1,4 @@
-<h2>Total Number of Items: <%= Item.count %> </h2>
+<h2>Total Number of Items: <%= Item.where(:user_id => current_user.id).count %> </h2>
 <h1>Tags</h1>
 <h2>Used Tags</h2>
 <% @used_tags.each do |tag|  %>
