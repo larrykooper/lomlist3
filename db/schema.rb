@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120623012410) do
+ActiveRecord::Schema.define(:version => 20120623172052) do
 
   create_table "act_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "user_id"
+    t.integer  "user_id",    :null => false
   end
 
   create_table "items", :force => true do |t|
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20120623012410) do
     t.boolean  "out_indicator"
     t.datetime "created_at",                                   :null => false
     t.datetime "updated_at",                                   :null => false
-    t.integer  "user_id"
+    t.integer  "user_id",                                      :null => false
   end
 
   create_table "taggings", :force => true do |t|
@@ -40,14 +40,14 @@ ActiveRecord::Schema.define(:version => 20120623012410) do
     t.integer  "item_id"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.integer  "user_id"
+    t.integer  "user_id",                                :null => false
   end
 
   create_table "tags", :force => true do |t|
     t.string   "name",       :default => "", :null => false
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
-    t.integer  "user_id"
+    t.integer  "user_id",                    :null => false
   end
 
   create_table "users", :force => true do |t|

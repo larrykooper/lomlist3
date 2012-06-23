@@ -58,7 +58,7 @@ Search:
 		  <span id="text-<%= item.number %>"><%= raw item.item_desc %></span><br>
 			<span class="tagcl">
 			<% item.tags.each do |t| %>   
-				<%= link_to t.name, "tags/#{t.name}/items" %>
+				<%= link_to t.name, "/tags/#{t.name}/items" %>
 			<% end %>
 			</span>
 		</td>

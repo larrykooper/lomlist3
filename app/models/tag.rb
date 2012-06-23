@@ -1,7 +1,7 @@
 # A Tag is a label used to categorize an item.
 # An item may have many tags.
 class Tag < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :user
   has_many :taggings
   has_many :items, :through => :taggings
   belongs_to :user
@@ -23,8 +23,8 @@ class Tag < ActiveRecord::Base
     return tag_names
   end  
   
-  def self.used_tags
-    Tag.joins(:taggings).select("distinct tags.id, tags.name, LOWER(tags.name)").order("LOWER(tags.name)")
+  def self.used_tags(user)
+    Tag.joins(:taggings).select("distinct tags.id, tags.name, LOWER(tags.name)").where("tags.user_id = ?", user.id).order("LOWER(tags.name)") 
   end
   
   def self.unused_tags
@@ -33,8 +33,8 @@ class Tag < ActiveRecord::Base
     "order by LOWER(name)")
   end
 
-  def add_item_manually(item)
-    Tagging.create(:tag => self, :item => item)
+  def add_item_manually(item, user)
+    Tagging.create(:tag => self, :item => item, :user => user)
   end
   
   def items_count

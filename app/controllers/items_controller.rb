@@ -5,10 +5,11 @@ class ItemsController < ApplicationController
   # POST /items.json 
   def create
     @item = Item.new(params[:item])
+    @item.user = current_user
     @item.create_date =    Time.local(params[:create_date][:year],params[:create_date][:month],params[:create_date][:day],12,15,1)    
     @item.item_desc = params[:larrytext]
     if @item.save
-      @item.tag_with_manually(params[:tag_list])
+      @item.tag_with_manually(params[:tag_list], current_user)
       flash[:notice] = 'Item  ' + @item.number.to_s + ' was successfully created.'
       redirect_to :action => 'show', :number => @item.number
     else
@@ -36,12 +37,9 @@ class ItemsController < ApplicationController
   end  
   
   # GET /items/{number}/edit
-  def edit       
-    if params[:number_to_edit]
-      @item = Item.find_by_number(params[:number_to_edit])
-    elsif params[:number]
-      @item = Item.find_by_number(params[:number])
-    end
+  def edit   
+    number_wanted = params[:number_to_edit] ? params[:number_to_edit] : params[:number] 
+    @item = current_user.items.find_by_number(number_wanted)
     if @item
       @lastitem = @item     
       @tags_to_display = @item.tag_string
@@ -65,7 +63,7 @@ class ItemsController < ApplicationController
   # GET /tags/foo/items.json
   def index
     if tag_name = params[:tagname]
-      @items = Item.find_tagged_with(tag_name).sort
+      @items = Item.find_tagged_with(tag_name, current_user).sort
       @page_header = "Listing items with tag: " + tag_name
     else
       @items = current_user.items.order("number")
@@ -90,7 +88,7 @@ class ItemsController < ApplicationController
   # POST /items/next-number.json
   def new_next 
     @lastitem = Item.find(:first, :order => "id DESC")
-    @item = Item.new_next
+    @item = Item.new_next(current_user)
     @tags_to_display = ""   
   end
   

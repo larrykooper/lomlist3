@@ -1,5 +1,5 @@
 class Item < ActiveRecord::Base
-  attr_accessible :act_type, :create_date, :item_desc, :number, :out_indicator, :short_task_name, :swiss_cheese, :value_when_done, :where_to_do
+  attr_accessible :act_type, :create_date, :item_desc, :number, :out_indicator, :short_task_name, :swiss_cheese, :value_when_done, :where_to_do, :user
   has_many :taggings, :dependent => :destroy   
   has_many :tags, :through => :taggings, :uniq => true
   belongs_to :user 
@@ -13,19 +13,26 @@ class Item < ActiveRecord::Base
 	["C", "C"]
 	].freeze
 	
-	def self.find_tagged_with(list)
+	def self.find_tagged_with(list, user)
 	   find_by_sql([
             "SELECT items.* FROM items, tags, taggings " +
             "WHERE items.id = taggings.item_id " +            
-            "AND taggings.tag_id = tags.id AND tags.name IN (?)",
-             list
+            "AND taggings.tag_id = tags.id AND tags.name IN (?)" +
+            "AND items.user_id = ?",
+             list, user.id
           ])
 	end
   
-  def self.new_next
-		theitem = self.new 
-		res = Item.connection.select_one("select max(number) as maxnum from items")	
-		theitem.number = Integer(res['maxnum']) + 1
+  def self.new_next(user)
+		theitem = self.new(:user => user)
+		res = Item.connection.select_one("SELECT MAX(number) AS maxnum FROM items " + 
+		      "WHERE user_id = #{user.id}")
+		maxnum = res['maxnum']
+		if maxnum      
+		  theitem.number = Integer(maxnum) + 1
+		else
+		  theitem.number = 1
+		end
 		theitem
 	end
 	
@@ -33,11 +40,11 @@ class Item < ActiveRecord::Base
 	  self.tags.collect{|t| t.name}.join(" ") 
 	end 
 	
-	def tag_with_manually(list)
+	def tag_with_manually(list, user)
     Tag.transaction do
-      taggings.destroy_all
+      taggings.destroy_all   # the item instance's taggings 
       Tag.parse(list).each do |name|        
-        Tag.find_or_create_by_name(name).add_item_manually(self)        
+        Tag.where(:name => name, :user_id => user.id).first_or_create.add_item_manually(self, user)      
       end
     end   
   end
