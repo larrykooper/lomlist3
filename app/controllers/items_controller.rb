@@ -68,7 +68,7 @@ class ItemsController < ApplicationController
       @items = Item.find_tagged_with(tag_name).sort
       @page_header = "Listing items with tag: " + tag_name
     else
-      @items = Item.order("number")
+      @items = current_user.items.order("number")
       @page_header = "Listing all items"
     end    
     respond_to do |format|
