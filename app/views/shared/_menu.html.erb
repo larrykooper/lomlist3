@@ -4,4 +4,10 @@
 
 <%= link_to "Maintain Act Types", act_types_path %>
 
+<% if user_signed_in? %>
+  <span id="hello_user">
+    Hello, User # <%= current_user.id %>
+  </span>  
+<% end %>
+
 <%= link_to "Print-friendly", '/items/printview' %>

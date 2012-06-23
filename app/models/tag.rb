@@ -4,6 +4,7 @@ class Tag < ActiveRecord::Base
   attr_accessible :name
   has_many :taggings
   has_many :items, :through => :taggings
+  belongs_to :user
   
   # input is a delimited list of tags 
   # output is an array of tags 
