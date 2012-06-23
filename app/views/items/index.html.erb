@@ -64,7 +64,7 @@ Search:
 		</td>
 		<td valign="top"><%= item.value_when_done %></td>
 		<td valign="top"><%= link_to 'Edit', "/items/#{item.number}/edit" %><br /><br />
-    <%= link_to 'Delete', "/items/#{item.number}", :method => :delete, :confirm => 'Are you sure you want to delete ' + item.number.to_s + '?' %></td>
+    <%= link_to 'Delete', "/items/#{item.number}", :method => :delete, :data =>{ :confirm => 'Are you sure you want to delete ' + item.number.to_s + '?'} %></td>
 	</tr>
 <% end %>
 </table>
