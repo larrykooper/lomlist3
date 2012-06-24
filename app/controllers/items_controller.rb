@@ -75,18 +75,18 @@ class ItemsController < ApplicationController
   
   # GET /items/new
   # GET /items/new.json
-  def new     
-    @lastitem = Item.find(:first, :order => "id DESC")
+  def new
     @item = Item.new   
+    @item.create_date = current_user.new_item_date
     @tags_to_display = ""
   end
   
   # Get LO number of "new next item"
   # POST /items/new-next 
   # POST /items/next-number.json
-  def new_next 
-    @lastitem = Item.find(:first, :order => "id DESC")
+  def new_next
     @item = Item.new_next(current_user)
+    @item.create_date = current_user.new_item_date
     @tags_to_display = ""   
   end
   

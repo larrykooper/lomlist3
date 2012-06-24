@@ -12,4 +12,15 @@ class User < ActiveRecord::Base
   has_many :taggings
   has_many :tags 
   # attr_accessible :title, :body
+
+  # New item date is the latest date of an item 
+  def new_item_date
+    newest_item = Item.where(:user_id => self.id).order("create_date DESC").first
+    if newest_item
+      newest_item.create_date
+    else
+      Time.new
+    end
+  end
+
 end

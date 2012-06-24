@@ -2,20 +2,9 @@
   <tr>
     <td><label for="item_create_date">Create date</label></td>
     <td>
-   	 <% # Date entered defaults to day of last item %>
-   	 <% if @lastitem %>
-     	 <% myday = @lastitem.create_date.day %> 
-     	 <% mymonth = @lastitem.create_date.month %> 
-     	 <% myyear = @lastitem.create_date.year %>     
-     <% else %>
-     <%   time = Time.new %>  
-       <% myday = time.day %> 
-     	 <% mymonth = time.month  %> 
-     	 <% myyear = time.year %>     
-     <% end %>	
-     <%= select_month(mymonth, :prefix => 'create_date') %>
-  	 <%= select_day(myday, :prefix => 'create_date') %>
-  	 <%= select_year(myyear, :prefix => 'create_date') %>  	  
+      <%= select_month(@item.create_date.month, :prefix => 'create_date') %>
+  	  <%= select_day(@item.create_date.day, :prefix => 'create_date') %>
+  	  <%= select_year(@item.create_date.year, :prefix => 'create_date') %>
     </td>
   </tr>
   <tr>
@@ -34,7 +23,10 @@
       %>  
       <br>
     </td>
-    </tr><tr><td></td><td>  
-   <br><%= submit_tag 'Save' %></td></tr>
+    </tr>
+  <tr>
+    <td></td>
+    <td><br><%= submit_tag 'Save' %></td>
+  </tr>
 </table>
 <br>
