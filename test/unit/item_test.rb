@@ -9,6 +9,8 @@ class ItemTest < ActiveSupport::TestCase
     @item = Item.find(1)
   end
  
+  # I don't need to translate this one to RSpec because it just checks 
+  # that the item fields after create are same as before create
   def test_create
     assert_kind_of Item,  @item
     assert_equal 1, @item.id
@@ -18,6 +20,8 @@ class ItemTest < ActiveSupport::TestCase
     assert_equal "Learn shiatsu massage", @item.item_desc        
   end
   
+  # I don't need to translate this one to RSpec because it 
+  # just checks that the item number is what I set it to after update 
   def test_update
 	  assert_equal 208, @item.number 
 	  @item.number = 2108
@@ -31,6 +35,7 @@ class ItemTest < ActiveSupport::TestCase
 	#  assert_raise(ActiveRecord::RecordNotFound) { Item.find(@item.id) }
  # end
   
+  # WOULD like to translate this to RSpec or cucumber
   def test_new_next
 	  mything = Item.new_next
 	  assert mything.number = 1686

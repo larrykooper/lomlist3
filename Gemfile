@@ -40,9 +40,13 @@ gem 'devise_invitable', '~> 1.0.2'
 # To use 'thin' web server 
 gem 'thin'
 
+group :development do 
+  gem 'rspec-rails'
+end
+
 group :test do 
   gem 'cucumber-rails', '1.2.1'
-  gem 'rspec-rails', '2.7.0'
+  gem 'rspec-rails'
   gem 'database_cleaner', '0.7.0'
   gem 'factory_girl_rails'
 end
