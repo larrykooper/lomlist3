@@ -1,3 +1,4 @@
+# An item is one item in the user's to do list.
 class Item < ActiveRecord::Base
   attr_accessible :act_type, :create_date, :item_desc, :number, :out_indicator, :short_task_name, :swiss_cheese, :value_when_done, :where_to_do, :user
   has_many :taggings, :dependent => :destroy   
