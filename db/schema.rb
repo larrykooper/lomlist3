@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120623193150) do
+ActiveRecord::Schema.define(:version => 20120627145343) do
 
   create_table "act_types", :force => true do |t|
     t.string   "name"
@@ -21,33 +21,33 @@ ActiveRecord::Schema.define(:version => 20120623193150) do
   end
 
   create_table "items", :force => true do |t|
-    t.datetime "create_date",                                  :null => false
-    t.integer  "number",          :limit => 8, :default => 0,  :null => false
-    t.string   "act_type",        :limit => 5, :default => "", :null => false
-    t.text     "item_desc",                                    :null => false
+    t.datetime "create_date",     :null => false
+    t.integer  "number",          :null => false
+    t.string   "act_type",        :null => false
+    t.text     "item_desc",       :null => false
     t.string   "value_when_done"
     t.string   "where_to_do"
     t.string   "short_task_name"
     t.string   "swiss_cheese"
     t.boolean  "out_indicator"
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
-    t.integer  "user_id",                                      :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "user_id",         :null => false
   end
 
   create_table "taggings", :force => true do |t|
-    t.integer  "tag_id",     :limit => 8, :default => 0, :null => false
-    t.integer  "item_id",                                :null => false
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.integer  "user_id",                                :null => false
+    t.integer  "tag_id",     :null => false
+    t.integer  "item_id",    :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id",    :null => false
   end
 
   create_table "tags", :force => true do |t|
-    t.string   "name",       :default => "", :null => false
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
-    t.integer  "user_id",                    :null => false
+    t.string   "name",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id",    :null => false
   end
 
   create_table "users", :force => true do |t|
