@@ -1,5 +1,5 @@
-
 class ActTypesController < ApplicationController
+   before_filter :authenticate_user!
   # GET /act_types
   # GET /act_types.json
   def index
