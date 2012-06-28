@@ -1,15 +1,15 @@
-<%= link_to "List all", items_path %>	  
-
-<%= link_to "Tag Report", '/tags/tag_report' %>
-
-<%= link_to "Maintain Act Types", act_types_path %>
-
 <% if user_signed_in? %>
+  <%= link_to "List all", items_path %>	  
+
+  <%= link_to "Tag Report", '/tags/tag_report' %>
+
+  <%= link_to "Maintain Act Types", act_types_path %>
+
   <span id="hello_user">
     Hello, <%= current_user.first_name %>
   </span>  
+
+  <%= link_to "Send an Invitation", new_user_invitation_path %>
+
+  <%= link_to "Print-friendly", '/items/printview' %>
 <% end %>
-
-<%= link_to "Send an Invitation", new_user_invitation_path %>
-
-<%= link_to "Print-friendly", '/items/printview' %>
