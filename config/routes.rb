@@ -1,5 +1,5 @@
 Lomlist3::Application.routes.draw do
-  devise_for :users, :skip => :registrations 
+  devise_for :users, :skip => :registrations, :controllers => { :invitations => 'users/invitations' }
 
   match '/items/new_next' => 'items#new_next', :via => :post
   match '/items/new' => 'items#new', :via => :get

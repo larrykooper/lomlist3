@@ -4,7 +4,7 @@ class Item < ActiveRecord::Base
   has_many :taggings, :dependent => :destroy   
   has_many :tags, :through => :taggings, :uniq => true
   belongs_to :user 
-  validates :number, :uniqueness => true
+  validates :number, :uniqueness => {:scope => :user_id}
   validates :number, :numericality => { :only_integer => true, :greater_than => 0 }
   validates :item_desc, :presence => true  
   

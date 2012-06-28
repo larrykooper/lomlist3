@@ -6,20 +6,25 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :invitable
 
   # Set up accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :invitation_limit
   has_many :act_types 
   has_many :items
   has_many :taggings
   has_many :tags 
+  after_invitation_accepted :set_up_new_user
   # attr_accessible :title, :body
   
-  INITIAL_ACT_TYPES = {
-	  "MA" => "My agenda",
-	  "SEC" => "Secondary items on my agenda" ,
-    "MAINT" => "Maintenance",
-    "FO" => "For others",
-    "BUDG" => "Budgeting and finances"
-   }
+  INITIAL_ACT_TYPES = [
+    ActType.new(:name => "MA"),  # "My agenda"
+    ActType.new(:name => "SEC"), # "Secondary items on my agenda"
+    ActType.new(:name => "MAINT"), # "Maintenance"
+    ActType.new(:name => "FO"), # "For others"
+    ActType.new(:name => "BUDG")  # "Budgeting and finances"
+   ]
+   
+   SAMPLE_ITEM = Item.new(:create_date => Time.now, :number => 1, 
+   :act_type => "MA",
+   :item_desc => "Your sample item. Edit it or delete it")
 
   # New item date is the latest date of an item 
   def new_item_date
@@ -33,10 +38,10 @@ class User < ActiveRecord::Base
   
   def set_up_new_user 
     # Give them an initial set of act types 
-    self.act_types.load(User::INITIAL_ACT_TYPES)
+    self.act_types=User::INITIAL_ACT_TYPES
     
     # Start them with a sample to-do item
-    self.items << (User::SAMPLE_ITEM)
+    self.items << User::SAMPLE_ITEM
     
     # Ask for their first and last name
     
