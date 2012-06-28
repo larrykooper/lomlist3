@@ -6,7 +6,7 @@
 
 <% if user_signed_in? %>
   <span id="hello_user">
-    Hello, User # <%= current_user.id %>
+    Hello, <%= current_user.first_name %>
   </span>  
 <% end %>
 
