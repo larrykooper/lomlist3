@@ -3,11 +3,18 @@
 <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
   <%= devise_error_messages! %>
 
-<% resource.class.invite_key_fields.each do |field| -%>
-  <p><%= f.label field %><br />
-  <%= f.text_field field %></p>
-<% end -%>
-
+  <% resource.class.invite_key_fields.each do |field| -%>
+    <p><%= f.label field %>*<br />
+    <%= f.text_field field %></p>
+  <% end -%>
+  
+  Name of person you are inviting (optional)<br/>
+<p>first name <br/ >
+<%= text_field "user", "first_name" %></p>
+    
+<p>last name <br/ >
+<%= text_field "user", "last_name" %></p>
+    
   <p><%= f.submit "Send an invitation" %></p>
 <% end %>
 
