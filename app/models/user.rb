@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :taggings
   has_many :tags 
   after_invitation_accepted :set_up_new_user
+  belongs_to :invited_by, :class_name => "User"
   # attr_accessible :title, :body
   
   INITIAL_ACT_TYPES = [
