@@ -8,8 +8,9 @@
   <span id="hello_user">
     Hello, <%= current_user.first_name %>
   </span>  
-
-  <%= link_to "Send an Invitation (#{current_user.invitation_limit} left)", new_user_invitation_path %>
+  <% if current_user.invitation_limit > 0 %>
+    <%= link_to "Send an Invitation (#{current_user.invitation_limit} left)", new_user_invitation_path %>
+  <% end %>  
 
   <%= link_to "Print-friendly", '/items/printview' %>
   
