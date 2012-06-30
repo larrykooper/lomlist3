@@ -15,6 +15,8 @@ Lomlist3::Application.routes.draw do
   match '/items/:number/edit' => 'items#edit', :via => :get
 
   match 'tags/:tagname/items' => 'items#index', :tagname =>  /[^\/]+/
+  
+  match '/help' => 'pages#display'
 
   resources :tags do
     collection do
