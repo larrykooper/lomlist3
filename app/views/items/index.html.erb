@@ -55,7 +55,7 @@ Search:
 		<td width="70" valign="top"><%= link_to item.number, "/items/#{item.number}/edit" %></td>
 		<td width="70" valign="top"><%= link_to item.act_type, "/acttype/#{item.act_type}" %></td>
 		<td width="750" valign="top">
-		  <span id="text-<%= item.number %>"><%= raw item.item_desc %></span><br>
+		  <span id="text-<%= item.number %>"><%= safe_item_desc(item) %></span><br>
 			<span class="tagcl">
 			<% item.tags.each do |t| %>   
 				<%= link_to t.name, "/tags/#{t.name}/items" %>

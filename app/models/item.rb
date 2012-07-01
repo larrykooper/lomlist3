@@ -1,3 +1,5 @@
+gem 'sanitize'
+
 # An item is one item in the user's to do list.
 class Item < ActiveRecord::Base
   attr_accessible :act_type, :create_date, :item_desc, :number, :out_indicator, :short_task_name, :swiss_cheese, :value_when_done, :where_to_do, :user
@@ -7,6 +9,7 @@ class Item < ActiveRecord::Base
   validates :number, :uniqueness => {:scope => :user_id}
   validates :number, :numericality => { :only_integer => true, :greater_than => 0 }
   validates :item_desc, :presence => true  
+  before_save :sanitize_input 
   
 	VALUES_WHENDONE = [
 	["A", "A"],
@@ -49,5 +52,10 @@ class Item < ActiveRecord::Base
       end
     end   
   end
+  
+  protected 
+  def sanitize_input 
+    self.item_desc = Sanitize.clean(self.item_desc, :elements => HTML_ELEMENTS_ALLOWED)
+  end 
       
 end

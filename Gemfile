@@ -21,6 +21,7 @@ gem 'jquery-rails'
 gem 'pg'
 gem 'devise'
 gem 'devise_invitable', '~> 1.0.2'
+gem 'sanitize'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

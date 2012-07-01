@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(params[:item])
     @item.user = current_user
-    @item.create_date =    Time.local(params[:create_date][:year],params[:create_date][:month],params[:create_date][:day],12,15,1)    
+    @item.create_date = Time.local(params[:create_date][:year],params[:create_date][:month],params[:create_date][:day],12,15,1)
     @item.item_desc = params[:larrytext]
     if @item.save
       @item.tag_with_manually(params[:tag_list], current_user)

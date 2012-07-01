@@ -30,7 +30,7 @@
 
 <p>
   <b>Item desc:</b>
-  <%= raw @item.item_desc %>
+  <%= safe_item_desc(@item) %>
 </p>
 
 <b>Tags:</b>

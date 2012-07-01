@@ -20,7 +20,7 @@ Master is paper copy</td>
   <td width="84" valign="top"><%= item.create_date.strftime("%m/%d/%y") %></td>
    <td width="70" valign="top"><%= link_to item.number, :action => "edit", :id => item.id %></td>
     <td width="70" valign="top"><%= item.act_type %></td>
- <td width="750"><%= raw item.item_desc %><br>
+ <td width="750"><%= safe_item_desc(item) %><br>
 <span class="tagcl"> 
 <% item.tags.each do |t| %> 
   
@@ -36,5 +36,3 @@ Master is paper copy</td>
     </tr>
 <% end %>
 </table>
-
-
