@@ -55,7 +55,8 @@ class Item < ActiveRecord::Base
   
   protected 
   def sanitize_input 
-    self.item_desc = Sanitize.clean(self.item_desc, :elements => HTML_ELEMENTS_ALLOWED)
+    self.item_desc = Sanitize.clean(self.item_desc, :elements => HTML_ELEMENTS_ALLOWED, :attributes => HTML_ATTRIBUTES_ALLOWED, 
+    :protocols => HTML_PROTOCOLS_ALLOWED)
   end 
       
 end

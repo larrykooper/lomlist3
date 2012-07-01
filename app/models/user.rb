@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
    
    SAMPLE_ITEM = Item.new(:create_date => Time.now, :number => 1, 
    :act_type => "MA",
-   :item_desc => "Your sample item. Edit it or delete it")
+   :item_desc => "Your sample item. Do an <b>important</b> thing. It might need a link to <a href=\"http://www.example.com\">www.example.com</a>.<br/><br/>Line breaks are nice! It might have <u>underline</u> or <i>italics</i>! Edit this item or delete it.")
 
   # New item date is the latest date of an item 
   def new_item_date
