@@ -23,7 +23,7 @@ $(document).ready(function() {
   $('#error-dialog').dialog({
     autoOpen: false,
     width: 400,
-    model: true, 
+    modal: true, 
     resizable: false,
     buttons: {
       "OK": function() {
