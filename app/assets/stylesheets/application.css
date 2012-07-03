@@ -42,20 +42,20 @@
   padding: 0 1em 0.5em 0.4em;
 }
 
-.feedbackdlg #lb-subject {
+.feedbackdlg #subject {
   margin-bottom: 13px;
   margin-top: 10px;
   width: 369px;
 }
 
-.feedbackdlg #lb-question {
+.feedbackdlg #user_question {
   height: 125px;
   margin-bottom: 15px;
   margin-top: 10px;
   width: 369px;
 }
 
-.feedbackdlg #lb-email {
+.feedbackdlg #sender_email {
   margin-top: 10px;
   width: 369px;    
 }    

@@ -17,14 +17,16 @@
     <%= render :partial => "shared/menu"  %>
     <%= render 'devise/menu/login_items' %>
   </div>
-  
+
   <div id="feedback-lightbox" title="Give feedback or get support">
-    <label>Message subject:</label>
-    <input id="lb-subject" type="text"/>
-    <label>Your question, suggestion, or request:</label>
-    <textarea id="lb-question"></textarea>
-    <label>Your email address:</label>
-    <input id="lb-email" type="text"/>   
+    <%= form_tag do %>
+      <label>Message subject:</label>
+      <%= text_field_tag :subject %>      
+      <label>Your question, suggestion, or request:</label>
+      <%= text_area_tag :user_question %>      
+      <label>Your email address:</label>
+      <%= text_field_tag :sender_email, current_user.email %>      
+    <% end %>
   </div>
 
   <div id="feedback">
