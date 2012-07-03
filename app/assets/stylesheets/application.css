@@ -11,6 +11,8 @@
  *= require_self
  *= require_tree .
  */
+/* top menu */
+
 #top_menu > a {
 	margin-right: 28px;
 }
@@ -18,6 +20,50 @@
 #hello_user {
 	margin-right: 28px;
 }
+
+/* end of top menu */
+
+/* feedback stuff */
+
+#feedback {
+  position: fixed;
+  right: -7px;
+  top: 280px;
+  cursor: pointer;
+}
+
+#feedback-lightbox {
+  font-size: 0.8em;
+}
+
+.feedbackdlg .ui-dialog-buttonpane {
+  border: none;
+  margin: 0;
+  padding: 0 1em 0.5em 0.4em;
+}
+
+.feedbackdlg #lb-subject {
+  margin-bottom: 13px;
+  margin-top: 10px;
+  width: 369px;
+}
+
+.feedbackdlg #lb-question {
+  height: 125px;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  width: 369px;
+}
+
+.feedbackdlg #lb-email {
+  margin-top: 10px;
+  width: 369px;    
+}    
+
+
+/* end of feedback stuff */
+
+/* list page */
 
 form#searchForm {
   margin: 10px 0;
@@ -34,6 +80,8 @@ form.newNextItemForm {
 form#deleteItem {
   margin: 9px 0;
 }
+
+/* end of list page */
 
 /* help */
 
