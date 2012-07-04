@@ -28,6 +28,8 @@ Lomlist3::Application.routes.draw do
 
   match 'acttype/:typename' => 'items#search_by_act_type'
   
+  match '/feedback_messages' => 'feedback_messages#send_message', :via => :post
+  
   root :to => 'items#index'   
 
   # The priority is based upon order of creation:

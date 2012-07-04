@@ -19,7 +19,7 @@
   </div>
 
   <div id="feedback-lightbox" title="Give feedback or get support">
-    <%= form_tag do %>
+    <%= form_tag '/feedback_messages', :id => 'feedback-form' do %>
       <label>Message subject:</label>
       <%= text_field_tag :subject %>      
       <label>Your question, suggestion, or request:</label>
