@@ -2,7 +2,7 @@ function sendFeedbackEmail() {
   var form = $("#feedback-form");
   $.post('/feedback_messages', form.serialize(), function(data){    
     // tell the user email was sent
-
+    $('#lightbox-response').html("Your feedback has been sent. Thanks!");
   });
 }
 
@@ -16,13 +16,12 @@ $(document).ready(function() {
      buttons: {
        "Send": function() {	
          sendFeedbackEmail();
-         $(this).dialog("close");
        }      
      }  
    });
    
    $('#feedback').click(function(e){
-    $('#feedback-lightbox').dialog('open'); 
+    $('#feedback-lightbox').dialog('open');
    
    });
    
