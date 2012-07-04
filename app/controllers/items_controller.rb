@@ -91,7 +91,7 @@ class ItemsController < ApplicationController
   end
   
   def printview
-    @items = Item.order("number") 
+    @items = current_user.items.order("number") 
   end
   
   def search 
@@ -103,7 +103,7 @@ class ItemsController < ApplicationController
   end 
   
   def search_by_act_type
-    @items = Item.where(:act_type => params[:typename]).order("number")
+    @items = current_user.items.where(:act_type => params[:typename]).order("number")
     @page_header = "Listing items with Act type: " + params[:typename]
     render :template => 'items/index'
   end

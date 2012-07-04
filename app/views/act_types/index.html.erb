@@ -9,7 +9,7 @@
   </tr>
 
 <% @act_types.each do |act_type| %>
-  <% item_count = Item.where(:act_type => act_type.name).count %>
+  <% item_count = current_user.items.where(:act_type => act_type.name).count %>
   <tr>
     <td><%= act_type.name %></td>    
     <td><%= link_to 'Edit', edit_act_type_path(act_type) %></td>
