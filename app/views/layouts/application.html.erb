@@ -25,14 +25,16 @@
       <label>Your question, suggestion, or request:</label>
       <%= text_area_tag :user_question %>      
       <label>Your email address:</label>
-      <%= text_field_tag :sender_email, current_user.email %>
+      <%= text_field_tag :sender_email, current_user.email if current_user %>
       <p id="lightbox-response"></p>
     <% end %>
   </div>
 
-  <div id="feedback">
-    <%= image_tag "feedback.png" %>
-  </div>
+  <% if user_signed_in? %>
+    <div id="feedback">
+      <%= image_tag "feedback.png" %>
+    </div>
+  <% end %>
 
 <%= yield %>
 
