@@ -14,25 +14,21 @@ Master is paper copy</td>
     <th>When<br/>done,<br />Value<br />(<u>to me</u>)</th>
     </tr>
   
-<% @items.each do |item| %>
-	<tr>  
-  
-  <td width="84" valign="top"><%= item.create_date.strftime("%m/%d/%y") %></td>
-   <td width="70" valign="top"><%= link_to item.number, :action => "edit", :id => item.id %></td>
-    <td width="70" valign="top"><%= item.act_type %></td>
- <td width="750"><%= safe_item_desc(item) %><br>
-<span class="tagcl"> 
-<% item.tags.each do |t| %> 
-  
-    <%= link_to t.name, :action => "list", :tagname => t.name %>
-    
-  
- <% end %>
-
-</span>
- </td>  
- <td valign="top"><%= item.value_when_done %></td>
+  <% @items.each do |item| %>
+    <tr>
+      <td width="84" valign="top"><%= item.create_date.strftime("%m/%d/%y") %></td>
+      <td width="70" valign="top"><%= link_to item.number, "/items/#{item.number}/edit" %></td>
+      <td width="70" valign="top"><%= link_to item.act_type, "/acttype/#{item.act_type}" %></td>
+      <td width="750">
+        <span id="text-<%= item.number %>"><%= safe_item_desc(item) %></span><br>
+        <span class="tagcl">
+          <% item.tags.each do |t| %>
+            <%= link_to t.name, "/tags/#{t.name}/items" %>
+          <% end %>
+        </span>
+      </td>
+      <td valign="top"><%= item.value_when_done %></td>
     
     </tr>
-<% end %>
+  <% end %>
 </table>
