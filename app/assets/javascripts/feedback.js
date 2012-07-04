@@ -2,7 +2,7 @@ function sendFeedbackEmail() {
   var form = $("#feedback-form");
   $.post('/feedback_messages', form.serialize(), function(data){    
     // tell the user email was sent
-    console.log('email sent'); // remove me 
+
   });
 }
 
@@ -16,6 +16,7 @@ $(document).ready(function() {
      buttons: {
        "Send": function() {	
          sendFeedbackEmail();
+         $(this).dialog("close");
        }      
      }  
    });
